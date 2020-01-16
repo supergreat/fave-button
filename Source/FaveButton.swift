@@ -51,11 +51,11 @@ open class FaveButton: UIButton {
     }
     
     @IBInspectable open var normalColor: UIColor     = UIColor(red: 137/255, green: 156/255, blue: 167/255, alpha: 1)
-    @IBInspectable open var selectedColor: UIColor   = UIColor(red: 226/255, green: 38/255,  blue: 77/255,  alpha: 1)
-    @IBInspectable open var dotFirstColor: UIColor   = UIColor(red: 152/255, green: 219/255, blue: 236/255, alpha: 1)
-    @IBInspectable open var dotSecondColor: UIColor  = UIColor(red: 247/255, green: 188/255, blue: 48/255,  alpha: 1)
+    @IBInspectable open var selectedColor: UIColor   = UIColor(red: 255/255, green: 221/255,  blue: 2/255,  alpha: 1)
+    @IBInspectable open var dotFirstColor: UIColor   = UIColor(red: 149/255, green: 57/255, blue: 255/255, alpha: 1)
+    @IBInspectable open var dotSecondColor: UIColor  = UIColor(red: 74/255, green: 144/255, blue: 226/255,  alpha: 1)
     @IBInspectable open var circleFromColor: UIColor = UIColor(red: 221/255, green: 70/255,  blue: 136/255, alpha: 1)
-    @IBInspectable open var circleToColor: UIColor   = UIColor(red: 205/255, green: 143/255, blue: 246/255, alpha: 1)
+    @IBInspectable open var circleToColor: UIColor   = UIColor(red: 149/255, green: 57/255, blue: 255/255, alpha: 1)
     
     @IBOutlet open weak var delegate: AnyObject?
     
@@ -197,8 +197,7 @@ extension FaveButton{
             return
         }
         
-        let delay = DispatchTime.now() + Double(Int64(Double(NSEC_PER_SEC) * Const.duration)) / Double(NSEC_PER_SEC)
-        DispatchQueue.main.asyncAfter(deadline: delay){
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()){
             delegate.faveButton(sender, didSelected: sender.isSelected)
         }
     }
