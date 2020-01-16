@@ -113,18 +113,19 @@ extension FaveIcon{
                 animations: {
                     self.alpha = 1
                 }, completion: nil)
+            
+            let scaleAnimation = Init(CAKeyframeAnimation(keyPath: "transform.scale")){
+                $0.values    = tweenValues!
+                $0.duration  = duration
+                $0.beginTime = CACurrentMediaTime()+selectedDelay
+            }
+            iconMask.add(scaleAnimation, forKey: nil)
         }
         
         guard animate else {
             return
         }
         
-        let scaleAnimation = Init(CAKeyframeAnimation(keyPath: "transform.scale")){
-            $0.values    = tweenValues!
-            $0.duration  = duration
-            $0.beginTime = CACurrentMediaTime()+selectedDelay
-        }
-        iconMask.add(scaleAnimation, forKey: nil)
     }
     
     
@@ -139,7 +140,7 @@ extension FaveIcon{
         let tweenFunction  = Elastic.ExtendedEaseOut
         
         while(t < d){
-            let scale = tweenFunction(t, from, c, d, c+0.001, 0.39988)  // p=oscillations, c=amplitude(velocity)
+            let scale = tweenFunction(t, from, c, d, c, 0.39988)  // p=oscillations, c=amplitude(velocity)
             values.append(scale)
             t += tpf
         }
