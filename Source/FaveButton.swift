@@ -51,7 +51,7 @@ open class FaveButton: UIButton {
     }
     
     @IBInspectable open var normalColor: UIColor     = UIColor(red: 137/255, green: 156/255, blue: 167/255, alpha: 1)
-    @IBInspectable open var selectedColor: UIColor   = UIColor(red: 255/255, green: 221/255,  blue: 2/255,  alpha: 1)
+    @IBInspectable open var selectedColor: UIColor   = UIColor(red: 255/255, green: 209/255,  blue: 0/255,  alpha: 1)
     @IBInspectable open var dotFirstColor: UIColor   = UIColor(red: 149/255, green: 57/255, blue: 255/255, alpha: 1)
     @IBInspectable open var dotSecondColor: UIColor  = UIColor(red: 74/255, green: 144/255, blue: 226/255,  alpha: 1)
     @IBInspectable open var circleFromColor: UIColor = UIColor(red: 221/255, green: 70/255,  blue: 136/255, alpha: 1)
@@ -188,6 +188,10 @@ extension FaveButton{
 extension FaveButton{
     func addActions(){
         self.addTarget(self, action: #selector(toggle(_:)), for: .touchUpInside)
+    }
+    
+    public func toggleButton() {
+        toggle(self)
     }
     
     @objc func toggle(_ sender: FaveButton){
