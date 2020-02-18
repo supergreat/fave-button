@@ -93,13 +93,11 @@ extension FaveIcon{
     func animateSelect(_ isSelected: Bool = false, fillColor: UIColor, duration: Double = 0.5, delay: Double = 0){
         let animate = duration > 0.0
         
-        if nil == tweenValues && animate {
-            tweenValues = generateTweenValues(from: 0, to: 1.0, duration: CGFloat(duration))
-        }
+        tweenValues = generateTweenValues(from: 0, to: 1.0, duration: CGFloat(duration))
         
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-            iconLayer.fillColor = fillColor.cgColor
+        iconLayer.fillColor = fillColor.cgColor
         CATransaction.commit()
         
         let selectedDelay = isSelected ? delay : 0
@@ -114,12 +112,14 @@ extension FaveIcon{
                     self.alpha = 1
                 }, completion: nil)
             
-            let scaleAnimation = Init(CAKeyframeAnimation(keyPath: "transform.scale")){
-                $0.values    = tweenValues!
-                $0.duration  = duration
-                $0.beginTime = CACurrentMediaTime()+selectedDelay
+            if tweenValues != nil {
+                let scaleAnimation = Init(CAKeyframeAnimation(keyPath: "transform.scale")){
+                    $0.values    = tweenValues
+                    $0.duration  = duration
+                    $0.beginTime = CACurrentMediaTime()+selectedDelay
+                }
+                iconMask.add(scaleAnimation, forKey: nil)
             }
-            iconMask.add(scaleAnimation, forKey: nil)
         }
         
         guard animate else {
